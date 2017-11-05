@@ -8,19 +8,21 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
-import entity.User;
+import com.lile.common.mybits.model.User;
+import com.lile.common.mybits.persistence.UserMapper;
+
 import junit.framework.Assert;
 
 public class UserDaoTest {
 	 @Test
 	    public void findUserById() {
 	        SqlSession sqlSession = getSessionFactory().openSession();  
-	        UserDao userMapper = sqlSession.getMapper(UserDao.class);  
-	        User user = userMapper.findUserById(2);  
-	        Assert.assertNotNull("Ã»ÕÒµ½Êý¾Ý", user);
+	        UserMapper userM = sqlSession.getMapper(UserMapper.class);
+	        User u= userM.selectByPrimaryKey(2);
+	        Assert.assertNotNull("Ã»ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½", u);
 	    }
 	    
-	    //Mybatis Í¨¹ýSqlSessionFactory»ñÈ¡SqlSession, È»ºó²ÅÄÜÍ¨¹ýSqlSessionÓëÊý¾Ý¿â½øÐÐ½»»¥
+	    //Mybatis Í¨ï¿½ï¿½SqlSessionFactoryï¿½ï¿½È¡SqlSession, È»ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½SqlSessionï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½Ð½ï¿½ï¿½ï¿½
 	    private static SqlSessionFactory getSessionFactory() {  
 	        SqlSessionFactory sessionFactory = null;  
 	        String resource = "configuration.xml";  

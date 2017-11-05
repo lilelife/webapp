@@ -34,7 +34,10 @@
   
   <!-- 映射文件，mybatis精髓， 后面才会细讲 -->
   <mappers>
-    <mapper resource="/webapp/src/main/resources/com.dy.dao/userDao-mapping.xml"/>
+    <!-- <mapper resource="/webapp/src/main/resources/mapper/persistence/UserMapper.xml"/> -->
+    <mapper resource="mapper/persistence/User_Mapper.xml"/>
+    <mapper resource="mapper/persistence/UserMapper.xml"/>
+   <!--  <package name="src.main.resource.mapper.persistence"></package> -->
   </mappers>
   
 </configuration>

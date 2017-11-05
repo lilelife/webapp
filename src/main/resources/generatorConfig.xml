@@ -7,11 +7,11 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
             connectionURL="jdbc:mysql://localhost:3306/lilelife?useUnicode=true&amp;characterEncoding=UTF-8"
             userId="root" password="123456" />
-        <javaModelGenerator targetPackage="common.mybits.model"
+        <javaModelGenerator targetPackage="com.lile.common.mybits.model"
             targetProject="D:\Java\workspace\webapp\src\main\java" />
         <sqlMapGenerator targetPackage="mapper.persistence"
             targetProject="D:\Java\workspace\webapp\src\main\resources" />
-        <javaClientGenerator targetPackage="common.mybits.persistence"
+        <javaClientGenerator targetPackage="com.lile.common.mybits.persistence"
             targetProject="D:\Java\workspace\webapp\src\main\java" type="XMLMAPPER" />
         <table schema="CL_DEMO" tableName="user" />
         

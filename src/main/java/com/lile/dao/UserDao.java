@@ -1,6 +1,6 @@
-package dao;
+package com.lile.dao;
 
-import entity.User;
+import com.lile.common.mybits.model.User;
 
 public interface UserDao {
 	
