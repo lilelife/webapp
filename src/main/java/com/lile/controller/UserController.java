@@ -12,15 +12,21 @@ import com.lile.common.mybits.model.User;
 import com.lile.common.mybits.persistence.UserMapper;
 import com.lile.service.UserService;
 
-@RequestMapping("User")
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+@Api(value = "/user", description = "用户")
+@RequestMapping("user")
 @RestController
 public class UserController {
 	@Autowired()
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 	
+	@ApiOperation(value="创建用户", notes="根据User对象创建用户")
 	@RequestMapping(value="/getUserByid",method=RequestMethod.GET)
-	public User getUserByid(@RequestParam(value="id") int id){
+	public User getUserByid(@RequestParam(value="id") @ApiParam(value = "用户Id", required = true) int id){
 		
 		return userService.getUserById(id);
 	}
