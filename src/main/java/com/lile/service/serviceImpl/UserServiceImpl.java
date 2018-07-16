@@ -20,4 +20,10 @@ public class UserServiceImpl implements UserService{
 		return userDao.findUserById(id);
 	}
 
+	@Override
+	public boolean insertUser(User user) {
+		// TODO Auto-generated method stub
+		return userDao.insertUser(user);
+	}
+
 }

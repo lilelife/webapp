@@ -18,4 +18,10 @@ public class UserDaoImpl implements UserDao{
 		return userMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public boolean insertUser(User user) {
+		// TODO Auto-generated method stub
+		return userMapper.insert(user)!=0;
+	}
+	
 }
