@@ -95,7 +95,21 @@
 	    <version>2.2.2</version>
 	</dependency>
 	<!--swagger2 end -->
-
+      <dependency>
+          <groupId>com.alibaba</groupId>
+          <artifactId>fastjson</artifactId>
+          <version>1.2.28</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-data-redis</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.16.20</version>
+          <scope>provided</scope>
+      </dependency>
     <dependency>
     	<groupId>javax.servlet</groupId>
     	<artifactId>servlet-api</artifactId>

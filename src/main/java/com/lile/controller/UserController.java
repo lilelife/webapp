@@ -1,17 +1,14 @@
 package com.lile.controller;
 
+import com.lile.util.redis.RedisService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.lile.common.mybits.model.User;
 import com.lile.common.mybits.persistence.UserMapper;
@@ -21,14 +18,20 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+import javax.annotation.Resource;
+
 @Api(value = "/user", description = "用户")
 @RequestMapping("user")
 @RestController
+@Slf4j
 public class UserController {
 	@Autowired()
 	@Qualifier("userServiceImpl")
 	private UserService userService;
-	
+
+	@Resource
+	private RedisService redisServiceImpl;
+
 	private Log logger =  LogFactory.getLog("UserController");
 	@ApiOperation(value="查找用户", notes="根据UserID获取用户")
 	@RequestMapping(value="/getUserByid",method=RequestMethod.GET)
@@ -44,6 +47,14 @@ public class UserController {
 		
 		return userService.insertUser(user);
 	}
-	
+
+	@GetMapping("/getStr")
+	public String testRedis(){
+
+//		String str = redisServiceImpl.getStr("lile");
+		String str =redisServiceImpl.get("lile");
+		log.info(str+"-----");
+		return str;
+	}
 	
 }
