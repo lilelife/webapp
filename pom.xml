@@ -3,9 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.ll</groupId>
   <artifactId>webapp</artifactId>
-  <packaging>war</packaging>
+  <packaging>pom</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>webapp Maven Webapp</name>
+    <modules>
+        <module>Common</module>
+    </modules>
+    <name>webapp Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <parent>
 		<groupId>org.springframework.boot</groupId>
