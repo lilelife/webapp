@@ -50,8 +50,12 @@
 	 	   <groupId>org.mybatis.spring.boot</groupId>
 	    	<artifactId>mybatis-spring-boot-starter</artifactId>
 	    <version>1.0.0</version>
+
 	</dependency>
-     <!-- 添加junit -->
+<!--      添加 generate-->
+
+
+      <!-- 添加junit -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -137,13 +141,14 @@
         </plugin>
         <!--mybits generator  -->
         <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.2</version>
-                <configuration>
-                    <verbose>true</verbose>
-                    <overwrite>true</overwrite>
-                </configuration>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-maven-plugin</artifactId>
+            <version>1.3.2</version>
+            <configuration>
+<!--                <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>-->
+                <verbose>true</verbose>
+                <overwrite>true</overwrite>
+            </configuration>
         </plugin>
         
         <plugin>

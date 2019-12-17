@@ -125,7 +125,7 @@
 
     </dependencies>
     <build>
-        <finalName>webapp</finalName>
+        <finalName>UserService</finalName>
         <plugins>
             <!-- 编码和编译和JDK版本 -->
             <plugin>
