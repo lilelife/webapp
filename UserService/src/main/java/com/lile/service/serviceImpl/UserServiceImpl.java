@@ -50,8 +50,7 @@ public class UserServiceImpl implements UserService {
 		user.setSalt(salt);
 		user.setCreateTime(new Date());
 		UserInfo userInfo = new UserInfo();
-
-
+		
 		userDao.insertUser(user);
 		BeanUtils.copyProperties(user,userInfo);
 		int id = user.getId();
