@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!--   <properties resource="dbConfig.properties"></properties> -->
+  
+  <!-- 指定Mybatis使用log4j -->
+  <settings>
+     <setting name="logImpl" value="LOG4J"/>
+  </settings>
+      
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        
+       <!--  -->   
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://47.105.48.220:3306/lilelife"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+         
+          <!-- 上面指定了数据库配置文件， 配置文件里面也是对应的这四个属性 -->
+         <!-- <property name="driver" value="${driver}"/>
+         <property name="url" value="${url}"/>
+         <property name="username" value="${username}"/>
+         <property name="password" value="${password}"/>  -->
+         
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <!-- 映射文件，mybatis精髓， 后面才会细讲 -->
+  <mappers>
+    <!-- <mapper resource="/webapp/src/main/resources/mapper/persistence/UserMapper.xml"/> -->
+    <mapper resource="mapper/persistence/User_Mapper.xml"/>
+    <mapper resource="mapper/persistence/UserMapper.xml"/>
+   <!--  <package name="src.main.resource.mapper.persistence"></package> -->
+  </mappers>
+  
+</configuration>
