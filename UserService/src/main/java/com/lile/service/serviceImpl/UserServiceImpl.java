@@ -1,8 +1,11 @@
 package com.lile.service.serviceImpl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lile.common.mybits.model.UserExample;
+import com.lile.common.mybits.persistence.UserMapper;
 import com.lile.service.UserService;
 import dto.UserDto;
+import dto.request.LoginRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,6 +20,7 @@ import response.UserInfo;
 import utils.PasswordUtil;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -25,6 +29,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired()
 	@Qualifier("userDaoImpl")
 	private UserDao userDao;
+	@Autowired
+	private UserMapper userMapper;
 	
 	@Override
 	public User getUserById(int id) {
@@ -57,5 +63,17 @@ public class UserServiceImpl implements UserService {
 		userInfo.setId(id);
 		log.info("create new user:" +JSONObject.toJSONString(userInfo));
 		return userInfo;
+	}
+
+	@Override
+	public User findUserByphone(String phone) {
+		UserExample userExample = new UserExample();
+		userExample.or().andPhoneEqualTo(phone);
+		List<User> users = userMapper.selectByExample(userExample);
+
+		if(users.isEmpty()){
+			return null;
+		}
+		return users.get(0);
 	}
 }
