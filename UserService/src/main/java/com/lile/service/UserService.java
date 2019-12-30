@@ -1,6 +1,7 @@
 package com.lile.service;
 
 import dto.UserDto;
+import dto.request.LoginRequest;
 import org.springframework.stereotype.Service;
 
 import com.lile.common.mybits.model.User;
@@ -15,4 +16,6 @@ public interface UserService {
 
 
 	public UserInfo createUser(UserDto userDto);
+
+	public User findUserByphone(String phone);
 }

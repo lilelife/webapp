@@ -19,6 +19,7 @@ import com.lile.dao.UserDao;
 import response.UserInfo;
 import utils.PasswordUtil;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -26,10 +27,9 @@ import java.util.List;
 @Slf4j
 public class UserServiceImpl implements UserService {
 	Log logger = LogFactory.getLog(UserServiceImpl.class);
-	@Autowired()
-	@Qualifier("userDaoImpl")
+	@Resource
 	private UserDao userDao;
-	@Autowired
+	@Resource
 	private UserMapper userMapper;
 	
 	@Override
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 		User user = new User();
 		BeanUtils.copyProperties(userDto,user);
 		String salt = PasswordUtil.getSalt();
-		String pwd256 = PasswordUtil.sha256(salt,userDto.getPwd());
+		String pwd256 = PasswordUtil.sha256(salt,userDto.getPwd());  //加盐生成密码
 		user.setPassword(pwd256);
 		user.setSalt(salt);
 		user.setCreateTime(new Date());

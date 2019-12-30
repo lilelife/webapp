@@ -3,7 +3,8 @@ package com.lile.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.lile.redis.RedisService;
 import dto.UserDto;
-import io.swagger.annotations.ApiModel;
+import dto.request.LoginRequest;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,29 +15,29 @@ import org.springframework.web.bind.annotation.*;
 import com.lile.common.mybits.model.User;
 import com.lile.service.UserService;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import response.UserInfo;
+import utils.Checker;
 import utils.DynamicResponse;
+import utils.ErrorCode;
+import utils.PasswordUtil;
 
 import javax.annotation.Resource;
 
 @Api(value = "/user", description = "用户")
-@RequestMapping("user")
+@RequestMapping("users")
 @RestController
 @Slf4j
 public class UserController {
-	@Autowired()
-	@Qualifier("userServiceImpl")
+	@Resource
 	private UserService userService;
 
 	@Resource
 	private RedisService redisServiceImpl;
 
 	private Log logger =  LogFactory.getLog("UserController");
+
 	@ApiOperation(value="查找用户", notes="根据UserID获取用户")
-	@RequestMapping(value="/getUserByid",method=RequestMethod.GET)
+	@RequestMapping(value="/id",method=RequestMethod.GET)
 	@ResponseBody
 	public DynamicResponse<User> getUserByid(@RequestParam(value="id",required=false,defaultValue="1") @ApiParam(value = "用户Id", required = true) int id){
 		logger.info("获取对User象--"+id);
@@ -51,7 +52,7 @@ public class UserController {
 	}
 
 	@ApiOperation(value = "注册用户")
-	@RequestMapping(value="/register",method=RequestMethod.POST)
+	@PutMapping
 	@ResponseBody
 	public DynamicResponse<UserInfo> register(@RequestBody UserDto userDto){
 		
@@ -60,15 +61,25 @@ public class UserController {
 		});
 	}
 
+	@ApiOperation(value = "用户登录")
+	@ApiResponses(
+			{@ApiResponse(code=200,message="成功",response = DynamicResponse.class)}
+	)
+	@PostMapping
+	@ResponseBody
+	public DynamicResponse<User>  login (@RequestBody LoginRequest loginRequest){
 
-	@GetMapping("/getStr")
-	public String testRedis(){
+		return DynamicResponse.of((()->{
+			User user = userService.findUserByphone(loginRequest.getPhone());
+			Checker.checkNoNull(user,ErrorCode.NOT_USER.throwSupplier("用户不存在"));
+			Checker.checkTrue(PasswordUtil.sha256(user.getSalt(),loginRequest.getPwd()).equals(user.getPassword()),
+					ErrorCode.LOGIN_FAILURE.throwSupplier("密码不正确"));
+			return  user;
+		}));
 
-//		String str = redisServiceImpl.getStr("lile");
-		String str =redisServiceImpl.get("lile");
-		logger.info(str+"-----");
-		return str;
 	}
+
+
 
 	@ApiOperation("测试插入")
 	@GetMapping("/setname/{key}/{value}")
