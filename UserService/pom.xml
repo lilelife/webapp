@@ -69,13 +69,19 @@
             <version>1.2</version>
         </dependency>
 
-        <!--     添加mybatis
+        <!--     添加mybatis-->
             <dependency>
                 <groupId>org.mybatis</groupId>
               <artifactId>mybatis</artifactId>
-                <version>3.2.6</version>
+                <version>3.4.0</version>
             </dependency>
-             -->
+
+        <!-- mybatis数据库字段类型映射-->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-typehandlers-jsr310</artifactId>
+            <version>1.0.2</version>
+        </dependency>
         <!-- 添加mysql驱动 -->
         <dependency>
             <groupId>mysql</groupId>
@@ -122,7 +128,13 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-
+        <!--        pageInfo 分页 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <finalName>UserService</finalName>
