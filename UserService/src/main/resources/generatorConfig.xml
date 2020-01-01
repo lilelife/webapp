@@ -14,7 +14,9 @@
             targetProject="src\main\resources" />
         <javaClientGenerator targetPackage="com.lile.common.mybits.persistence"
             targetProject="src\main\java" type="XMLMAPPER" />
-        <table  tableName="user" />
+<!--        <table  tableName="user" />-->
+        <table tableName="todo" />
+        <table tableName="book"/>
         
     </context>
 </generatorConfiguration>
