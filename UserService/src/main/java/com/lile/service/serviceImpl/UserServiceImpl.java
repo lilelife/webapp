@@ -20,6 +20,7 @@ import response.UserInfo;
 import utils.PasswordUtil;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserService {
 		String pwd256 = PasswordUtil.sha256(salt,userDto.getPwd());  //加盐生成密码
 		user.setPassword(pwd256);
 		user.setSalt(salt);
-		user.setCreateTime(new Date());
+		user.setCreateTime(LocalDateTime.now());
 		UserInfo userInfo = new UserInfo();
 		
 		userDao.insertUser(user);
