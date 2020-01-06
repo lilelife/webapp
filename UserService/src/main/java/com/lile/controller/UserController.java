@@ -64,6 +64,7 @@ public class UserController {
 			{@ApiResponse(code=200,message="成功",response = DynamicResponse.class)}
 	)
 	@PostMapping
+	@CrossOrigin
 	@ResponseBody
 	public DynamicResponse<User>  login (@RequestBody LoginRequest loginRequest){
 
