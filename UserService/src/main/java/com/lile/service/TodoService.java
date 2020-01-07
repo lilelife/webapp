@@ -10,4 +10,6 @@ public interface TodoService {
     public  Todo createTodo(TodoDto todoDto);
 
     public PageInfo<TodoDto> findTodo(int userId,int status);
+
+    public Integer doneTodo(int todoId);
 }

@@ -10,6 +10,7 @@ import java.beans.ConstructorProperties;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TodoDto {
+    private int id;
     private int userId;
     private String title;
     private String content;

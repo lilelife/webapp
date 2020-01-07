@@ -36,4 +36,11 @@ public class TodoController {
         return DynamicResponse.of(()->todoService.findTodo(userId,status));
     }
 
+    @ApiOperation("做完某项")
+    @GetMapping(path = "/{todoId}")
+    @ResponseBody
+    public DynamicResponse<Integer> doneTodo(@PathVariable int todoId){
+
+        return DynamicResponse.of(()->todoService.doneTodo(todoId));
+    }
 }

@@ -44,11 +44,12 @@ public class TodoServiceImpl  implements TodoService {
 
     @Override
     public PageInfo<TodoDto> findTodo(int userId, int status) {
-        PageInfo<TodoDto> pageInfo = new PageInfo<>();
+
         TodoExample todoExample = new TodoExample();
         todoExample.or().andUserIdEqualTo(userId).andStatusEqualTo(status);
         List<Todo> list = todoMapper.selectByExample(todoExample);
         List<TodoDto> todoDtos = new ArrayList<>();
+        log.info("todos:"+JSONObject.toJSONString(list));
         todoDtos = list.stream().map(
             todo->{
                 TodoDto to = new TodoDto();
@@ -56,7 +57,19 @@ public class TodoServiceImpl  implements TodoService {
                 return to;
             }
         ).collect(Collectors.toList());
+        PageInfo<TodoDto> pageInfo = new PageInfo<>(todoDtos);
         log.info("用户："+userId+",代办事项列表："+JSONObject.toJSONString(pageInfo));
         return pageInfo;
+    }
+
+
+    @Override
+    public Integer doneTodo(int todoId) {
+        Todo todo = new Todo();
+        todo.setId(todoId);
+        todo.setStatus(TodoStatus.DONE.getCode()); // 代做事项 完成
+        int result = todoMapper.updateByPrimaryKeySelective(todo);
+        log.info("更新 totdId"+todoId+", 完成");
+        return result;
     }
 }
