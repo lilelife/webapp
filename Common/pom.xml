@@ -41,6 +41,27 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>Common</artifactId>
+<!--    <build>-->
+<!--        <finalName>Common</finalName>-->
+<!--        <plugins>-->
+<!--            &lt;!&ndash; 编码和编译和JDK版本 &ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <version>2.3.2</version>-->
+<!--                <configuration>-->
+<!--                    <source>1.8</source>-->
+<!--                    <target>1.8</target>-->
+<!--                    <encoding>utf8</encoding>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 
 </project>

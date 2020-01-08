@@ -1,3 +1,5 @@
 /target/
 
 UserService/target/
+/UserService/target/
+/Common/target/classes/

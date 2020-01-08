@@ -141,13 +141,19 @@
         <plugins>
             <!-- 编码和编译和JDK版本 -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>  <!-- 所需要的依赖包都打进来-->
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>utf8</encoding>
+                    <mainClass>com.lile.SpringbootApplication</mainClass>  <!--指定主入口 main函数-->
+                    <addResources>false</addResources>
                 </configuration>
             </plugin>
             <!--mybits generator  -->
@@ -160,11 +166,16 @@
                     <overwrite>true</overwrite>
                 </configuration>
             </plugin>
-
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
             </plugin>
+
+
         </plugins>
     </build>
     

@@ -7,13 +7,11 @@ import com.lile.common.mybits.model.TodoExample;
 import com.lile.common.mybits.persistence.TodoMapper;
 import com.lile.enumns.TodoStatus;
 import com.lile.service.TodoService;
-import com.sun.xml.internal.bind.v2.TODO;
+
 import dto.TodoDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
