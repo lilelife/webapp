@@ -14,7 +14,22 @@
             targetProject="src\main\resources" />
         <javaClientGenerator targetPackage="com.lile.common.mybits.persistence"
             targetProject="src\main\java" type="XMLMAPPER" />
-        <table  tableName="user" />
+        <table  tableName="user" >
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+            <columnOverride column="create_time" property="createTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" jdbcType="OTHER" javaType="java.time.LocalDateTime" />
+
+        </table>
+        <table tableName="todo" >
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+            <columnOverride column="create_time" property="createTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" jdbcType="OTHER" javaType="java.time.LocalDateTime" />
+
+        </table>
+        <table tableName="book">
+            <!--   自定义 类型转换-->
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
+            <columnOverride column="create_time" property="createTime" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" jdbcType="OTHER" javaType="java.time.LocalDateTime" />
+
+        </table>
         
     </context>
 </generatorConfiguration>

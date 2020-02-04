@@ -8,9 +8,10 @@
   
   <!-- 指定Mybatis使用log4j -->
   <settings>
-     <setting name="logImpl" value="LOG4J"/>
+<!--     <setting name="logImpl" value="LOG4J"/>-->
+    <setting name="logImpl" value="STDOUT_LOGGING" />
   </settings>
-      
+
   <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC"/>
@@ -39,5 +40,5 @@
     <mapper resource="mapper/persistence/UserMapper.xml"/>
    <!--  <package name="src.main.resource.mapper.persistence"></package> -->
   </mappers>
-  
+
 </configuration>
