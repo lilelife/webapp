@@ -1,6 +1,8 @@
 package com.lile.service.serviceImpl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.lile.common.mybits.model.UserExample;
 import com.lile.common.mybits.persistence.UserMapper;
 import com.lile.service.UserService;
@@ -45,6 +47,13 @@ public class UserServiceImpl implements UserService {
 	public boolean insertUser(User user) {
 
 		return userDao.insertUser(user);
+	}
+
+	// jwt获取token
+	@Override
+	public  String getToken(User user){
+		return JWT.create().withAudience(user.getId()+"")
+				.sign(Algorithm.HMAC256("lile"));  // 用lile加密，也可以将密钥保存在配置文件中
 	}
 
 	@Override

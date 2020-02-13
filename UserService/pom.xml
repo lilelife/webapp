@@ -106,7 +106,12 @@
             <version>3.1</version>
         </dependency>
 
-
+        <!--        添加 jwt -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.4.0</version>
+        </dependency>
 
         <!--swagger2 end -->
         <dependency>

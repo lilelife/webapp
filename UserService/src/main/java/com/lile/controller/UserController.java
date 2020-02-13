@@ -1,6 +1,8 @@
 package com.lile.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.lile.redis.RedisService;
 import dto.UserDto;
 import dto.request.LoginRequest;
@@ -73,6 +75,9 @@ public class UserController {
 			Checker.checkNoNull(user,ErrorCode.NOT_USER.throwSupplier("用户不存在"));
 			Checker.checkTrue(PasswordUtil.sha256(user.getSalt(),loginRequest.getPwd()).equals(user.getPassword()),
 					ErrorCode.LOGIN_FAILURE.throwSupplier("密码不正确"));
+			// todo 处理token 封装res
+			String token = userService.getToken(user);
+
 			return  user;
 		}));
 

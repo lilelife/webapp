@@ -10,10 +10,7 @@ import com.alibaba.fastjson.JSONObject;
  * @Version 1.0
  */
 public class Shuap2 extends  Thread{
-    public static void main(String[] args) {
-        Shuap2 shuap2 = new Shuap2();
-        shuap2.start();
-    }
+
 
     @Override
     public void run() {

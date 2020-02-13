@@ -14,6 +14,7 @@ public interface UserService {
 	
 	public boolean insertUser(User user);
 
+	public String getToken(User user);
 
 	public UserInfo createUser(UserDto userDto);
 

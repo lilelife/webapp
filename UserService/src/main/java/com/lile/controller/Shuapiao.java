@@ -42,57 +42,7 @@ public class Shuapiao {
         return ip+counter;
     }
 
-    public static void main(String[] args) {
-        Mythread m1 = new Mythread();
-        Mythread m2 = new Mythread();
-        Mythread m3 = new Mythread();
-        Mythread m4 = new Mythread();
-        Mythread m5 = new Mythread();
-        m1.start();
-        m2.start();
-        m3.start();
-        m4.start();
-        m5.start();
 
-        Shuapiao shuapiao = new Shuapiao();
-        String phone = "";
-        System.out.println(shuapiao.getChineseName());
-        String name ="";
-        int num = 0;
-        while(num++<70000){
-            phone = shuapiao.getTel();
-            name = shuapiao.getChineseName();
-            String token =  shuapiao.getT(phone);
-            System.out.println(token);
-            String ut = shuapiao.doPostLogin(shuapiao.login,token,phone,name) ;
-            //   登录失败继续执行
-            if(ut.equals("{\"code\":101,\"msg\":\"手机号码与姓名不匹配\",\"data\":null}")){
-
-                continue;
-            }
-
-            String a =  shuapiao.doVote(ut);
-            JSONObject jsonObject = JSONObject.parseObject(a);
-            String data = jsonObject.getString("data");
-            System.out.println(name+","+phone+"-----剩余票："+data);
-           if(data==null){
-               phone = shuapiao.getTel();
-               name = shuapiao.getChineseName();
-           }else{
-               JSONObject jsonOb = JSONObject.parseObject(data);
-               String remain = jsonOb.getString("remain");
-               if(remain.equals("0")){
-                   // 新手机号
-                   phone = shuapiao.getTel();
-                   name = shuapiao.getChineseName();
-               }
-           }
-
-        }
-
-
-
-    }
 
 
 
