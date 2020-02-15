@@ -12,6 +12,7 @@ import java.util.function.Supplier;
 public enum ErrorCode {
     SUCCESS("200","success"),
     LOGIN_FAILURE("400","登录失败"),
+    PERMISSION_DENIED("401","权限不足"),
     NOT_USER("300","用户不存在"),
     SERVER_ERROR("500", "系统出错了")
     ;

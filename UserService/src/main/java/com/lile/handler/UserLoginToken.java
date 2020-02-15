@@ -13,6 +13,6 @@ import java.lang.annotation.Target;
  * @Param
         * @return
         **/
-@interface UserLoginToken {
+public @interface UserLoginToken {
     boolean required() default  true;
 }

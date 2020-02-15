@@ -1,17 +1,14 @@
 package com.lile.handler;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.lile.common.mybits.model.User;
 import com.lile.service.UserService;
 import exceptions.UncheckedException;
+import io.jsonwebtoken.JwtException;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import utils.ErrorCode;
+import utils.JwtTokenUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +25,8 @@ import java.lang.reflect.Method;
 public class AuthenticationInterceptor  implements HandlerInterceptor {
     @Resource
     private UserService userService;
+    @Resource
+    private JwtTokenUtil jwtTokenUtil;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) throws Exception {
@@ -53,24 +52,23 @@ public class AuthenticationInterceptor  implements HandlerInterceptor {
                 if (token == null) {
                     throw new UncheckedException(ErrorCode.LOGIN_FAILURE,"无token,请重新登录");
                 }
-                // 获取 token 中的 user id
-                String userId;
+                // 获取 token 中的 phone ，phone唯一
+                String phone;
                 try {
-                    userId = JWT.decode(token).getAudience().get(0);
-                } catch (JWTDecodeException j) {
-                    throw new RuntimeException("401");
+                    phone = jwtTokenUtil.getUsernameFromToken(token);
+                } catch (JwtException j) {
+                    throw new UncheckedException(ErrorCode.PERMISSION_DENIED,"token错误，权限不足");
                 }
-                User user = userService.getUserById(Integer.parseInt(userId));
+                User user = userService.getUserById(Integer.parseInt(phone));
                 if (user == null) {
-                    throw new RuntimeException("用户不存在，请重新登录");
+                    throw new UncheckedException(ErrorCode.PERMISSION_DENIED,"用户不存在，重新登录");
+
                 }
                 // 验证 token
-                JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256("lile")).build();
-                try {
-                    jwtVerifier.verify(token);
-                } catch (JWTVerificationException e) {
-                    throw new RuntimeException("401");
+                if(!jwtTokenUtil.isTokenExpired(token)&& jwtTokenUtil.generateTokenByUsername(phone).equals(token)){
+                    throw new UncheckedException(ErrorCode.PERMISSION_DENIED,"token过期或不正确");
                 }
+
                 return true;
             }
         }

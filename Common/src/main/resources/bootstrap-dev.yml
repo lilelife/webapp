@@ -1,0 +1,3 @@
+jwt:
+  secret: lile #密钥
+  expiration: 100000 #过期时间
